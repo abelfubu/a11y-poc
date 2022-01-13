@@ -31,6 +31,8 @@ export class TicketItemComponent implements Highlightable {
 
   @HostListener('click')
   onClick() {
+    if (this.disabled) return;
+
     this.host.keyManager.setActiveItem(this);
     this.scrollIntoView();
   }
