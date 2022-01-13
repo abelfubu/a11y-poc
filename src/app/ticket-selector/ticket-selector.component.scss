@@ -1,3 +1,9 @@
-div:focus {
-  border: 1px solid red;
+div {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(100px, 1fr));
+  overflow-x: scroll;
+
+  :focus {
+    border: 1px solid red;
+  }
 }

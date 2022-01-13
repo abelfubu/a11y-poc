@@ -18,25 +18,19 @@ export class TicketSelectorComponent {
 
   @HostListener('keyup', ['$event'])
   keyUp(event: KeyboardEvent) {
-    switch (event.code) {
-      case 'ArrowLeft':
-        this.keyManager.setPreviousItemActive();
-        break;
-
-      case 'ArrowRight':
-        this.keyManager.setNextItemActive();
-        break;
-
-      default:
-        break;
-    }
+    this.keyManager.onKeydown(event);
+    this.keyManager.activeItem?.scrollIntoView();
   }
 
-  private keyManager!: ActiveDescendantKeyManager<TicketItemComponent>;
+  keyManager!: ActiveDescendantKeyManager<TicketItemComponent>;
 
   ngAfterContentInit() {
-    this.keyManager = new ActiveDescendantKeyManager(this.options)
-      .withWrap()
-      .withTypeAhead();
+    this.keyManager = new ActiveDescendantKeyManager(this.options).withWrap();
+    this.keyManager.withHorizontalOrientation('ltr');
+    this.keyManager.withVerticalOrientation(false);
+    this.options.get(
+      Math.floor(Math.random() * this.options.length)
+    )!.disabled = true;
+    this.keyManager.setFirstItemActive();
   }
 }

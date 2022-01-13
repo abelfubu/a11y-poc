@@ -1,9 +1,15 @@
 :host {
   border: 1px solid blue;
-  padding: 0.2rem;
-  display: inline-block;
+  height: 2rem;
+  display: block;
+  text-align: center;
 
   &.active {
     background-color: red;
+  }
+
+  &.disabled {
+    background-color: #ccc;
+    color: #666;
   }
 }
